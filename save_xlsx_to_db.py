@@ -4,8 +4,6 @@ import sys
 import MySQLdb
 import pandas as pd
 
-print('MySQLdb: %s') % MySQLdb.__version__
-
 def saveData(excelPath):
     conn = MySQLdb.connect(
         host = 'localhost',
@@ -43,8 +41,8 @@ def saveData(excelPath):
     conn.close()
 
 if __name__ == '__main__':
-    if len(sys.argv) > 3:
-        excelPath = sys.argv[2]
+    if len(sys.argv) >= 2:
+        excelPath = sys.argv[1]
     else:
         excelPath = 'Prices.xlsx'
 

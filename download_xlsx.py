@@ -37,8 +37,8 @@ def download(targetUrl):
             f.write(data)
 
 if __name__ == '__main__':
-    if len(sys.argv) > 3:
-        targetUrl = sys.argv[2]
+    if len(sys.argv) >= 2:
+        targetUrl = sys.argv[1]
     else:
         targetUrl = 'http://www.gold.org/download/file/3022/Prices.xlsx'
 
