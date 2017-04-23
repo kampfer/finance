@@ -24,6 +24,8 @@ def saveData(excelPath):
     conn.commit()
 
     goldDailyPrices = pd.read_excel(
+        convert_float = False,
+        thousands = ',',
         io = excelPath,
         sheetname = 'Daily',
         header = 7,
