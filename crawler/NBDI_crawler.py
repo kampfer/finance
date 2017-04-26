@@ -5,21 +5,6 @@ import requests
 import MySQLdb
 from pyquery import PyQuery
 
-def extraTable(url):
-    data = []
-    def extraRow(index, elem):
-        pqElem = PyQuery(elem)
-        date = time.strptime(pqElem.find('th').text(), '%d-%b-%y')
-        value = pqElem.find('td').text()
-        data.append((date, value))
-    r = requests.get(url)
-    doc = PyQuery(r.content)
-    doc('.pubtables tr').each(extraRow)
-    return data
-
-# table = extraTable('https://www.federalreserve.gov/releases/h10/summary/indexb_b.htm')
-# print len(table)
-
 class NBDICrawler:
 
     url='https://www.federalreserve.gov/releases/h10/summary/indexb_b.htm'
@@ -67,7 +52,7 @@ class NBDICrawler:
             pqElem = PyQuery(elem)
             date = time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(pqElem.find('th').text(), '%d-%b-%y'))
             if pqElem.find('td').text() == 'ND':
-                value = ''
+                value = None
             else:
                 value = float(pqElem.find('td').text())
             data.append((date, value))
@@ -81,4 +66,5 @@ class NBDICrawler:
         self.cursor.close()
         self.conn.close()
 
-NBDICrawler()
+if __name__ == '__main__':
+    NBDICrawler()
